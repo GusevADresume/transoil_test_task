@@ -8,7 +8,7 @@ class UserInfo(models.Model):
     user_photo = models.ImageField()
     some_info = models.CharField(max_length=2500)
 
-
+#TableUser
 #123user*
 
 class News(models.Model):

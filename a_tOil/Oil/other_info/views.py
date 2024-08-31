@@ -1,12 +1,11 @@
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters
-from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from django.contrib.auth.models import User
 
 from other_info.models import UserInfo, News
 
-from other_info.serializers import UserInfoSerializer, NewsSerializer
+from other_info.serializers import UserInfoSerializer, NewsSerializer, UserSerializer
 
 
 class UserInfoViewSet(ModelViewSet):
@@ -15,9 +14,15 @@ class UserInfoViewSet(ModelViewSet):
     serializer_class = UserInfoSerializer
     http_method_names = ['get']
 
+    def list(self, request, *args, **kwargs):
+        info_serializer = UserInfoSerializer(UserInfo.objects.filter(user=request.user.id), many=True)
+        user_serializer = UserSerializer(User.objects.filter(id=request.user.id), many=True)
+        return Response({'info': info_serializer.data, 'user': user_serializer.data})
+
 
 class NewsViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     http_method_names = ['get']
+

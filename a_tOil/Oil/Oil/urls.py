@@ -6,8 +6,14 @@ from drf_spectacular.views import (SpectacularAPIView, SpectacularSwaggerView, )
 
 from i_table.views import ITableViewSet
 
+from other_info.views import UserInfoViewSet, NewsViewSet
+
 table_router = DefaultRouter()
+user_router = DefaultRouter()
+news_router = DefaultRouter()
 table_router.register('infotable', ITableViewSet)
+user_router.register('user', UserInfoViewSet)
+news_router.register('news', NewsViewSet)
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
@@ -15,4 +21,4 @@ urlpatterns = [
                   path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
                   path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
                   path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-              ] + table_router.urls
+              ] + table_router.urls + user_router.urls + news_router.urls

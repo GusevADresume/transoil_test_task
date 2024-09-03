@@ -26,3 +26,6 @@ class NewsViewSet(ModelViewSet):
     serializer_class = NewsSerializer
     http_method_names = ['get']
 
+    def list(self, request, *args, **kwargs):
+        info_serializer = NewsSerializer(News.objects.all(), many=True)
+        return Response(info_serializer.data)

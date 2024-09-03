@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+#BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -120,7 +121,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-MEDIA_ROOT = os.path.join(BASE_DIR, '/media/') # 'data' is my media folder
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')#.replace('\\', '/')
 MEDIA_URL = '/media/'
 STATIC_ROOT = '/static/'
 STATIC_URL = 'static/'
@@ -157,7 +158,7 @@ SPECTACULAR_SETTINGS = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=50),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=500),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,
@@ -185,7 +186,7 @@ SIMPLE_JWT = {
     "JTI_CLAIM": "jti",
 
     "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
-    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=50),
+    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=500),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 
     "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",

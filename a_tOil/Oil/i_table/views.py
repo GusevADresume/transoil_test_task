@@ -9,7 +9,7 @@ from i_table.permissions import IsInTableGroup
 
 
 class ITableViewSet(ModelViewSet):
-    #permission_classes = [IsAuthenticated, IsInTableGroup]
+    permission_classes = [IsAuthenticated, IsInTableGroup]
     queryset = infotable.objects.all()
     serializer_class = InfoTableSerializer
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]

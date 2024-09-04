@@ -16,5 +16,5 @@ class ITableViewSet(ModelViewSet):
     ordering_fields = '__all__'
     filterset_fields = '__all__'
     search_fields = ['maker', 'model']
-    http_method_names = ['get', 'post', 'patch', 'delete', 'put']  # patch - http://127.0.0.1:8000/infotable/2/
-    pagination_class = LimitOffsetPagination  # GET /infotable/?Census_tract=&city=&dol=&format=api&model=&vehicle_location=&vin=&limit=5&offset=3
+    http_method_names = ['get', 'post', 'patch', 'delete', 'put']
+    pagination_class = LimitOffsetPagination

@@ -34,6 +34,5 @@ class NewsViewSet(ModelViewSet):
 class NewData(ModelViewSet):
     queryset = NewData.objects.all()
     permission_classes = [AllowAny]
-    http_method_names = ['get', 'post']
+    http_method_names = ['get', 'post', 'put', 'patch']
     serializer_class = NewDataSerializer
-    

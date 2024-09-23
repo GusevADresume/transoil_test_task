@@ -8,14 +8,16 @@ from django.conf import settings
 
 from i_table.views import ITableViewSet
 
-from other_info.views import UserInfoViewSet, NewsViewSet
+from other_info.views import UserInfoViewSet, NewsViewSet, NewData
 
 table_router = DefaultRouter()
 user_router = DefaultRouter()
 news_router = DefaultRouter()
+new_data_router = DefaultRouter()
 table_router.register('infotable', ITableViewSet)
 user_router.register('user', UserInfoViewSet)
 news_router.register('news', NewsViewSet)
+new_data_router.register('new_data', NewData)
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
@@ -23,4 +25,4 @@ urlpatterns = [
                   path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
                   path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
                   path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-              ] + table_router.urls + user_router.urls + news_router.urls  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ] + new_data_router.urls +table_router.urls + user_router.urls + news_router.urls  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

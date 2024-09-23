@@ -1,8 +1,13 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 
-from other_info.models import UserInfo, News
+from other_info.models import UserInfo, News, NewData
 
+
+class NewDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewData
+        fields = '__all__'
 
 class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:

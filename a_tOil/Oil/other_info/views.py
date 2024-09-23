@@ -1,11 +1,11 @@
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth.models import User
 
-from other_info.models import UserInfo, News
+from other_info.models import UserInfo, News, NewData
 
-from other_info.serializers import UserInfoSerializer, NewsSerializer, UserSerializer
+from other_info.serializers import UserInfoSerializer, NewsSerializer, UserSerializer, NewDataSerializer
 
 
 class UserInfoViewSet(ModelViewSet):
@@ -29,3 +29,10 @@ class NewsViewSet(ModelViewSet):
     def list(self, request, *args, **kwargs):
         info_serializer = NewsSerializer(News.objects.all(), many=True)
         return Response(info_serializer.data)
+
+
+class NewData(ModelViewSet):
+    queryset = NewData.objects.all()
+    permission_classes = [AllowAny]
+    http_method_names = ['get', 'post', 'put', 'patch']
+    serializer_class = NewDataSerializer
